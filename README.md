@@ -121,5 +121,10 @@ and downstream feature computation are outside this standalone package.
 Only the web app, video preparation script, dependency manifest and documentation
 are distributed. Original research videos, human ratings, masks, checkpoints,
 experiments, reports, local environments and credentials are excluded.
-No license for the original app is asserted in this preparation; the owner should
-choose a license before offering open-source reuse. Third-party terms still apply.
+
+## License
+
+The original app code and documentation are available under the [MIT License](LICENSE).
+Copyright (c) 2026 wanzhao yang.
+Third-party dependencies and model weights, including SAM 2, remain subject to
+their respective licenses and terms.
