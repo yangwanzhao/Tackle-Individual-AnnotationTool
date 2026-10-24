@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Individual Tackle Annotator</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <h1>Player Tracking</h1>
+        <p id="outputPath" class="muted">Loading…</p>
+        <div class="progress"><span id="progressText">0 / 0 saved</span></div>
+        <div id="itemList" class="item-list"></div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h2 id="title">Loading…</h2>
+            <p id="meta" class="muted"></p>
+          </div>
+          <div class="row">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+          </div>
+        </header>
+
+        <div class="video-shell">
+          <video id="video" playsinline preload="metadata"></video>
+          <canvas id="overlay"></canvas>
+        </div>
+
+        <section class="transport panel">
+          <div class="row wrap">
+            <button id="playBtn">Play</button>
+            <button id="backBtn">−1 frame</button>
+            <button id="forwardBtn">+1 frame</button>
+            <button id="backSecondBtn">−1 second</button>
+            <button id="forwardSecondBtn">+1 second</button>
+            <span id="timeText" class="readout">Frame 0</span>
+          </div>
+          <input id="timeline" type="range" min="0" max="1" step="1" value="0" />
+        </section>
+
+        <section class="grid">
+          <div class="panel">
+            <h3>1. Define event window</h3>
+            <p class="muted">Pause at the central conflict frame. The viewer and SAM 2 will use only the configured time before and after it.</p>
+            <div class="row wrap">
+              <label class="opacity">Seconds each side <input id="windowSecondsInput" type="number" min="0.25" max="15" step="0.25" value="2" /></label>
+              <button id="eventBtn" class="primary">Set conflict frame</button>
+              <button id="gotoEventBtn">Go to conflict</button>
+            </div>
+            <div id="eventText" class="status-text">Not set</div>
+          </div>
+
+          <div class="panel">
+            <h3>2. Select players</h3>
+            <p class="muted">Pause on a clear frame, choose a role, then drag a box around that player. Draw both boxes on the same frame.</p>
+            <div class="row wrap">
+              <button id="tacklerBtn" class="role tackler">Draw tackler box</button>
+              <button id="carrierBtn" class="role carrier">Draw ball carrier box</button>
+              <button id="gotoBoxBtn">Go to box frame</button>
+              <button id="clearBoxBtn">Clear selected box</button>
+            </div>
+            <div id="selectionText" class="status-text">No players selected.</div>
+          </div>
+
+          <div class="panel">
+            <h3>3. Run tracking</h3>
+            <p class="muted">Propagate both player masks backward and forward through the event window. A successful run saves the annotation.</p>
+            <div class="row wrap">
+              <button id="propagateBtn" class="primary">Run SAM 2 tracking</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>4. Correct masks (optional)</h3>
+            <p class="muted">Review the overlaid masks. Select a role, add positive or negative clicks on a bad frame, then run tracking again.</p>
+            <div class="row wrap">
+              <button id="positiveBtn">Positive click</button>
+              <button id="negativeBtn">Negative click</button>
+              <button id="undoClickBtn">Undo click</button>
+              <button id="rerunBtn" class="primary">Rerun SAM 2</button>
+              <button id="reviewVideoBtn">Generate review video</button>
+              <label class="opacity">Mask opacity <input id="opacityInput" type="range" min="0" max="0.9" step="0.05" value="0.45" /></label>
+            </div>
+            <div id="correctionText" class="status-text">No corrections on this frame.</div>
+          </div>
+
+        </section>
+
+        <section class="panel output-panel">
+          <h3>Output</h3>
+          <div id="jobText" class="status-text">Ready.</div>
+          <a id="reviewVideoLink" class="review-link" target="_blank" rel="noopener" hidden>Open review video</a>
+        </section>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+# Local datasets, annotations, masks, cached frames and videos
+/data/
+/outputs/
+*.mp4
+*.mov
+*.wmv
+*.avi
+*.mkv
+# Downloaded model weights
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+# Environments, caches and local configuration
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+.idea/
+.vscode/
